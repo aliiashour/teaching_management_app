@@ -65,7 +65,11 @@
         {
             return $this->user_password ;  
         }
-
+        public function get_main_category()
+        {
+            $category = ['home', 'students', 'subjects', 'quizes', 'change password'] ; 
+            return $category ; 
+        }
         public function fetch_data($user_id)
         {
             $q = "SELECT * FROM $this->tbl WHERE user_id = :user_id" ; 
