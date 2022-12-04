@@ -1,8 +1,8 @@
 <?php
     /////////////////////////////////////////////////////////////////////////////
-    //Main page -dashboard///////////////////////////////
+    //Student page///////////////////////////////
 
-    $page_title = "dashboard" ; 
+    $page_title = "students" ; 
     include_once "./init.php" ; 
 
     $res = $teacher->fetch_data($_SESSION['user_id']) ; 

@@ -39,6 +39,19 @@
     line-height: 40px;
     list-style-type: none;
 }
+
+.menu ul li:hover, .menu ul .row li a:hover{
+    color: #DDD;
+}
+.menu ul li.active, .menu ul .row li a.active{
+    color: #868b89;
+}
+.menu ul .row li a{
+    text-decoration: none;
+    color: #fff7f7;
+    font-size: 17px;
+    font-weight: 400;
+}
 .menu ul .row .category-dropdown-icon:hover{
     cursor: pointer;
     color: #DDD;

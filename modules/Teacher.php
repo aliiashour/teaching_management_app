@@ -67,8 +67,13 @@
         }
         public function get_main_category()
         {
-            $category = ['home', 'students', 'subjects', 'quizes', 'change password'] ; 
-            return $category ; 
+
+            $data = array(
+                "categores" => ['home', 'students', 'subjects', 'quizes', 'change password'],
+                "icons" => ['<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-users"></i>', '<i class="fa-solid fa-list"></i>','<i class="fa-solid fa-pen-to-square"></i>','<i class="fa-solid fa-gear"></i>']
+
+            ) ;
+            return $data ; 
         }
         public function fetch_data($user_id)
         {

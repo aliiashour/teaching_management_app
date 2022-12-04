@@ -19,6 +19,8 @@ function re_size_page(){
 // show/hide category items
 $(".category-dropdown-icon").each(function(){
     $(this).on("click", function(){
+        
+        $(this).toggleClass("fa-rotate-90") ; 
         let target = $(this).data("target") ; 
         $("#"+target).slideToggle("fast") ; 
     });
