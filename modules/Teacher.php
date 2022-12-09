@@ -75,13 +75,30 @@
             ) ;
             return $data ; 
         }
-        public function fetch_data($user_id)
+        // get teacher data
+        public function fetch_data($teacher_id)
         {
             $q = "SELECT * FROM $this->tbl WHERE user_id = :user_id" ; 
             $stmt = $this->con->prepare($q) ; 
-            $stmt->execute(array( ':user_id' => $user_id )) ; 
+            $stmt->execute(array( ':user_id' => $teacher_id )) ; 
             return $stmt ; 
         }
+        // get teache subject count
+        public function fetch_subject_count($teacher_id){
+            $q = "SELECT COUNT(*) FROM subjects WHERE subject_publisher = :teacher_id" ; 
+            $stmt = $this->con->prepare($q) ; 
+            $stmt->execute(array( ':teacher_id' => $teacher_id )) ; 
+            return $stmt->rowCount() ; 
+        }
+        // get teache student count
+        public function fetch_student_count($teacher_id){
+            $q = "SELECT COUNt(*) as number FROM `enrollments` WHERE enrollment_subject_id IN (SELECT subject_id FROM subjects WHERE subject_publisher = :teacher_id)" ; 
+            $stmt = $this->con->prepare($q) ; 
+            $stmt->execute(array( ':teacher_id' => $teacher_id )) ; 
+            $row = $stmt->fetch() ; 
+            return $row['number']; 
+        }
+        
         public function __destruct()
         {
             $this->con = null ;     

@@ -59,3 +59,34 @@
 .menu ul .row .category{
     display: none;
 }
+
+.data{
+    padding: 10px !important;
+    background-color: #FFF;
+}
+.data h1{
+    color: #393030;
+    font-size: 47px;
+    font-weight: 600;
+}
+.data .statistics{
+    margin-top: 20px;
+    padding: 10px !important;
+}
+.data .statistics .row{
+    justify-content: space-between;
+}
+.data .statistics .row > div{
+    padding: 5px !important ;
+    margin-bottom: 2px;
+    border-left: 3px solid red;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #ffffff7a;
+    box-shadow: 2px 1px 5px #ddd;
+}
+.data .statistics .row > div > p > a{
+    cursor: pointer;
+    text-decoration: none;
+}
+/* rgba(var(--bs-primary-rgb),var(--bs-text-opacity))!important */
