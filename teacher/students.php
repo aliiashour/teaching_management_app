@@ -77,7 +77,25 @@
                     </div>
                     <div class="data col-9">
                         <!-- tables data -->
-                        data
+                        <h1 class="text-capitalize">
+                            student management page
+                        </h1>
+                        <div class="students">
+                            <div id="response"></div>
+                            <table id="datatable" class="table hover">
+                                <thead>
+                                    <th>S.N</th>
+                                    <th>First name</th>
+                                    <th>Second name</th>
+                                    <th>Number</th>
+                                    <!-- <th>Subject count</th> -->
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -95,7 +113,34 @@
 
 ?>
     <?php include_once $templates. "footer.php" ?>
-    
+    <script>
+        
+        // setting datatable
+        $("#datatable").DataTable({
+            "pagingType": 'full_numbers',
+            // "processing":true,
+            "reponsive":true,
+            "language":{
+                "search":"_INPUT_",
+                "searchPlaceholder":"Search..."
+            },
+            "serverSide" : true,
+            "select" : true,
+            "lengthChange":true,
+            "paging":true,
+            "order":[],
+            "ajax":{
+                "url":"../inc/handle_files/teacher/fetch_students_data.php",
+                "type":"post",
+            },
+            "fnCreateRow":function(nRow, aData, iDataIndex){
+                $(nRow).attr('id', aData[0]) ; 
+            },
+            "columnDefs":[{
+                "target":[0,5],
+                "orderable":false,
+            }]
+        }) ; 
+    </script>    
 </body>
 </html>
-

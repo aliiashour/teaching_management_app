@@ -77,7 +77,40 @@
                     </div>
                     <div class="data col-9">
                         <!-- tables data -->
-                        data
+                        <h1 class="text-capitalize">
+                            teacher dashboard
+                        </h1>
+                        <!-- statistics -->
+                        <div class="statistics">
+                            <div class="row justify-content-space-between">
+                                <div class="col-10 col-sm-10 col-md-5 col-lg-2">
+                                    <i class="fa-solid fa-users fs-4"></i>
+                                    <p class="text-capitalize text-primary">
+                                        <a href="./students.php">
+                                            <span><?php echo $teacher->fetch_student_count(2)?></span>
+                                            students
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="col-10 col-sm-10 col-md-5 col-lg-2">
+                                    <i class="fa-solid fa-list fs-4"></i>
+                                    <p class="text-capitalize text-primary">
+                                        <a href="./subjects.php">
+                                            <span><?php echo $teacher->fetch_subject_count($_SESSION['user_id'])?></span>
+                                            subjects
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="col-10 col-sm-10 col-md-5 col-lg-2">
+                                    <i class="fa-solid fa-list fs-4"></i>
+                                    <p class="text-capitalize text-primary">test</p>
+                                </div>
+                                <div class="col-10 col-sm-10 col-md-5 col-lg-2">
+                                    <i class="fa-solid fa-list fs-4"></i>
+                                    <p class="text-capitalize text-primary">test</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
