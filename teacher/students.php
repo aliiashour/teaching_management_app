@@ -45,15 +45,17 @@
                                                                 }
                                                                 $item .= '">
                                                                     '.$data['icons'][$i].' <a class="text-capitalize';
-                                                                 
+                                                                
                                                                 if($page_title == $category || ($page_title =='dashboard' && $category =='home')){
                                                                     $item .=' active' ; 
                                                                 }   
                                                                 $item .= '" ';
                                                                 if($category == 'home'){
                                                                     $item .= 'href="./"' ; 
+                                                                }elseif($category == "change password"){
+                                                                    $item .= 'id="change_password_button"' ; 
                                                                 }else{
-                                                                    $item .= 'href="./'.$category.'.php"' ; 
+                                                                    $item .= 'href="./'.$category.'.php"' ;
                                                                 }
                                                                 $item .='>'.$category.'</a>
                                                                 </li>
@@ -80,6 +82,14 @@
                         <h1 class="text-capitalize">
                             student management page
                         </h1>
+                        <div class="row">
+                            <div class="col-12 bg-dark text-light">just links</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-end">
+                                <button data-title='Add Student' data-action='add' id="add_user_button" class="btn btn-md btn-primary">add</button>
+                            </div>
+                        </div>
                         <div class="students">
                             <div id="response"></div>
                             <table id="datatable" class="table hover">
@@ -141,6 +151,189 @@
                 "orderable":false,
             }]
         }) ; 
-    </script>    
+        
+        $(document).on('click', '#add_user_button', function(){
+            $("#user_first_name").val('') ;
+            $("#user_last_name").val('') ; 
+            $("#user_number").val('') ; 
+            $("#user_password").val('') ; 
+            $("#user_status").val('') ; 
+            $("#user_course").val('') ; 
+            $modal_title = $(this).data("title") ; 
+            $modal_action = $(this).data("action") ; 
+            $("#title").html($modal_title) ;
+            $("#action").html($modal_action) ;
+            $("#user_modal").modal('show') ; 
+        }) ; 
+        // click to edit button
+        $(document).on('click', '#edit_button', function(){
+            var user_id = $(this).data('user_id') ; 
+            $modal_title = $(this).data("title") ; 
+            $modal_action = $(this).data("action") ; 
+            $("#title").html($modal_title) ;
+            $("#action").html($modal_action) ;
+            if(user_id != ''){
+                // now fetch user data
+                $.ajax({
+                    url:"../inc/handle_files/teacher/fetch_student_data.php",
+                    method:"POST",
+                    data:{user_id:user_id},
+                    success:function(data){
+                        var json = JSON.parse(data) ;
+                        if(json.status =='found'){
+                            // exist user
+                            $("#user_id").val(json['data']['user_id']) ; 
+                            $("#user_first_name").val(json['data']['user_first_name']) ; 
+                            $("#user_last_name").val(json['data']['user_last_name']) ;  
+                            $("#user_number").val(json['data']['user_number']); 
+                            $("#user_status").val(json['data']['user_status']) ;
+                            $("#user_course").val(json['data']['user_course']) ;
+                            $("#user_password").val('') ;
+                            $("#user_modal").modal('show') ; 
+                        }
+                    }
+                }) ; 
+            }
+        }) ;
+
+        // delete user
+        $(document).on('click', '#delete_button', function(){
+            var user_id = $(this).data("user_id") ; 
+            // now delete user directly
+            if(confirm('are you sure?')){
+                $.ajax({
+                    url:"../inc/handle_files/teacher/delete_student.php",
+                    method:"POST",
+                    data:{user_id:user_id},
+                    success:function(data){
+                        json = JSON.parse(data) ; 
+                        if(json['status'] == 'success'){
+                            $("#datatable").DataTable().draw() ; 
+                            $("#response").html('<div class="alert alert-success text-start">user deleted</div>') ; 
+                            setTimeout(function(){
+                                $("#response").html('') ; 
+                            }, 2000) ; 
+                        }
+                    }
+                });
+            }
+        }) ; 
+
+        
+        // submit the modal 
+        $(document).on("submit", "#user_modal", function(event){
+            event.preventDefault() ;
+            var user_id = $("#user_id").val() ; 
+            var user_first_name = $("#user_first_name").val() ; 
+            var user_last_name = $("#user_last_name").val() ; 
+            var user_number = $("#user_number").val() ; 
+            var user_password = $("#user_password").val() ; 
+            var user_status = $("#user_status").val();
+            var user_course = $("#user_course").val();
+            var url = "../inc/handle_files/teacher/" + $("#action").html() + "_student.php" ; 
+            if(user_first_name != ''  && user_last_name != ''  && user_number != ''  && user_status != '' && user_course != 0){
+                $.ajax({
+                    url:url,
+                    method:"post",
+                    data:{user_id:user_id, user_first_name:user_first_name, user_last_name:user_last_name, user_number:user_number, user_password:user_password, user_status:user_status, user_course:user_course},
+                    success:function(data){
+                        var json = JSON.parse(data) ; 
+                        if(json.status == "success"){
+                            $("#datatable").DataTable().draw() ; 
+                            $("#response").html('<div class="alert alert-success">' + json.msg + '</div>') ; 
+                            $("#user_first_name").val('') ;
+                            $("#user_last_name").val('') ; 
+                            $("#user_number").val('') ; 
+                            $("#user_password").val('') ; 
+                            $("#user_status").val('') ; 
+                            $("#user_course").val('') ; 
+                            $("#user_modal").modal('hide') ; 
+                        }else{
+                            $("#response-form").html('<div class="alert alert-danger">' +json.msg + '</div>') ; 
+                        }
+                        setTimeout(function(){
+                            $("#response").html('');
+                            $("#response-form").html('');
+
+                        }, 2000);
+                    }
+                }) ; 
+            }else{
+                $("#response-form").html('<div class="alert alert-danger">fill all fieds</div>') ; 
+                setTimeout(function(){
+                    $("#response-form").html('') ; 
+                    $("#user_modal").modal('hide') ; 
+                }, 2000) ; 
+            
+            } 
+        }) ;
+    </script> 
+    
+    <!-- main user modal -->
+    <div id="user_modal" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" method="POST">
+                    <input type="hidden" id="user_id">
+                    <div id="response-form"></div>
+                    <div class="col-md-6">
+                        <label for="input_first_name" class="form-label">first name</label>
+                        <input type="text" class="form-control" id="user_first_name" name="user_first_name">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="input_last_name" class="form-label">last name</label>
+                        <input type="text" class="form-control" id="user_last_name" name="user_last_name">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="input_number" class="form-label">number</label>
+                        <input type="text" class="form-control" id="user_number" name="user_number">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="user_password" name="user_password">
+                    </div>
+                    <div class="col-md-8">
+                        <label for="inputState" class="form-label">Course</label>
+                        <select name="user_course" id="user_course" class="form-select">
+                            <option selected>Choose...</option>
+                            <!-- <option value="pended">PENDED</option> -->
+                            <!-- here get all courses of this teacher -->
+                            <?php
+                                // $courses_count = $teacher->fetch_subject_count($_SESSION['user_id']) ; 
+                                $res = $teacher->get_subject_title($_SESSION['user_id']) ; 
+                                if($res->rowCount()){
+                                    while($course = $res->fetch(PDO::FETCH_ASSOC)){
+                                        extract($course) ; 
+                                        echo '<option value="'. $subject_id .'">'. $subject_title .'</option>' ; 
+                                    }
+                                }else{
+                                    echo '<option value="0">there are no courses yet</option>' ; 
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Status</label>
+                        <select name="user_status" id="user_status" class="form-select">
+                            <option selected>Choose...</option>
+                            <option value="PENDED">PENDED</option>
+                            <option value="ACTIVE">ACTIVE</option>
+                        </select>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary" id="action"></button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>   
 </body>
 </html>

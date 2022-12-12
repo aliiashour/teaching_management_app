@@ -90,13 +90,21 @@
             $stmt->execute(array( ':teacher_id' => $teacher_id )) ; 
             return $stmt->rowCount() ; 
         }
-        // get teache student count
+        // get teacher student count
         public function fetch_student_count($teacher_id){
             $q = "SELECT COUNt(*) as number FROM `enrollments` WHERE enrollment_subject_id IN (SELECT subject_id FROM subjects WHERE subject_publisher = :teacher_id)" ; 
             $stmt = $this->con->prepare($q) ; 
             $stmt->execute(array( ':teacher_id' => $teacher_id )) ; 
             $row = $stmt->fetch() ; 
             return $row['number']; 
+        }
+        // get teacher subjects
+        public function get_subject_title($teacher_id)
+        {
+            $q = "SELECT * FROM `subjects` WHERE subject_status = 'ACTIVE' AND subject_publisher = :teacher_id" ; 
+            $stmt = $this->con->prepare($q) ; 
+            $stmt->execute(array(':teacher_id' => $teacher_id )) ; 
+            return $stmt ; 
         }
         
         public function __destruct()

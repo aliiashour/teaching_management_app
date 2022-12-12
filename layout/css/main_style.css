@@ -40,6 +40,9 @@
     list-style-type: none;
 }
 
+.menu #change_password_button{
+    cursor: pointer;
+}
 .menu ul li:hover, .menu ul .row li a:hover{
     color: #DDD;
 }
@@ -69,7 +72,7 @@
     font-size: 47px;
     font-weight: 600;
 }
-.data .statistics{
+.data > div{
     margin-top: 20px;
     padding: 10px !important;
 }

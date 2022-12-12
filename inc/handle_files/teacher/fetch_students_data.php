@@ -50,15 +50,16 @@
             $sub_arr[] = $row['user_first_name'] ;
             $sub_arr[] = $row['user_last_name'] ; 
             $sub_arr[] = $row['user_number'] ; 
-            // count
-            $sub_arr[] = '<span class="btn btn-sm bg-danger text-light">'.$row['user_status'].'</span>' ; 
-            // if($row['status'] != 'closed'){
-            //     $sub_arr[] = '<a class="btn btn-md btn-info" href="../takeSurvey/index.php?survey_id='.$row['survey_id'].'" target="_blank"><i class="fa-solid fa-list"></i></a>' ; 
-            // }
-            // $sub_arr[] = '' ; 
-            
-            // $data[] = $sub_arr ; 
-            $sub_arr[] = 'edit' ; 
+            if($row['user_status'] == 'ACTIVE'){
+                $sub_arr[] = '<span class="btn btn-sm bg-success text-light">'.ucfirst(strtolower($row['user_status'])).'</span>' ; 
+            }else{
+                $sub_arr[] = '<span class="btn btn-sm bg-danger text-light">'.ucfirst($row['user_status']).'</span>' ; 
+            }
+            $sub_arr[] = '
+                <button data-title="Edit User" data-action="update" id="edit_button" class="btn btn-warning" data-user_id="' . $row['user_id'] . '"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button id="delete_button" class="btn btn-danger" data-user_id="' . $row['user_id'] . '"><i class="fa-sharp fa-solid fa-trash"></i></button>
+            ' ; 
+            $data[] = $sub_arr ; 
             $counter +=1 ; 
         }
     }

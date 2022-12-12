@@ -52,8 +52,10 @@
                                                                 $item .= '" ';
                                                                 if($category == 'home'){
                                                                     $item .= 'href="./"' ; 
+                                                                }elseif($category == "change password"){
+                                                                    $item .= 'id="change_password_button"' ; 
                                                                 }else{
-                                                                    $item .= 'href="./'.$category.'.php"' ; 
+                                                                    $item .= 'href="./'.$category.'.php"' ;
                                                                 }
                                                                 $item .='>'.$category.'</a>
                                                                 </li>
