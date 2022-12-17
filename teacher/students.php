@@ -140,7 +140,7 @@
             "paging":true,
             "order":[],
             "ajax":{
-                "url":"../inc/handle_files/teacher/fetch_students_data.php",
+                "url":"../inc/handle_files/teacher/students/fetch_students_data.php",
                 "type":"post",
             },
             "fnCreateRow":function(nRow, aData, iDataIndex){
@@ -175,7 +175,7 @@
             if(user_id != ''){
                 // now fetch user data
                 $.ajax({
-                    url:"../inc/handle_files/teacher/fetch_student_data.php",
+                    url:"../inc/handle_files/teacher/students/fetch_student_data.php",
                     method:"POST",
                     data:{user_id:user_id},
                     success:function(data){
@@ -203,7 +203,7 @@
             // now delete user directly
             if(confirm('are you sure?')){
                 $.ajax({
-                    url:"../inc/handle_files/teacher/delete_student.php",
+                    url:"../inc/handle_files/teacher/students/delete_student.php",
                     method:"POST",
                     data:{user_id:user_id},
                     success:function(data){
@@ -232,7 +232,7 @@
             var user_status = $("#user_status").val();
             var user_course = $("#user_course").val();
             var previous_course_date = $("#previous_course_date").val();
-            var url = "../inc/handle_files/teacher/" + $("#action").html() + "_student.php" ; 
+            var url = "../inc/handle_files/teacher/students/" + $("#action").html() + "_student.php" ; 
             if(user_first_name != ''  && user_last_name != ''  && user_number != ''  && user_status != '' && user_course != 0){
                 $.ajax({
                     url:url,
