@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2022 at 02:06 PM
+-- Generation Time: Dec 17, 2022 at 02:17 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -38,7 +38,10 @@ CREATE TABLE `enrollments` (
 --
 
 INSERT INTO `enrollments` (`enrollment_student_id`, `enrollment_subject_id`, `enrollment_started_at`) VALUES
-(3, 1, '2022-12-03');
+(4, 1, '2022-12-17'),
+(5, 2, '2022-12-12'),
+(13, 3, '2022-12-17'),
+(14, 3, '2022-12-17');
 
 -- --------------------------------------------------------
 
@@ -59,7 +62,10 @@ CREATE TABLE `subjects` (
 --
 
 INSERT INTO `subjects` (`subject_id`, `subject_title`, `subject_code`, `subject_status`, `subject_publisher`) VALUES
-(1, 'object oriented programming', 'CS-OOP', 'ACTIVE', 2);
+(1, 'object oriented programming', 'CS-OOP', 'ACTIVE', 2),
+(2, 'operating system', 'CS_OS', 'ACTIVE', 2),
+(3, 'Genetic algorithms', 'CS_GA', 'ACTIVE', 12),
+(5, 'desicion support', 'DS_DS', 'ACTIVE', 2);
 
 -- --------------------------------------------------------
 
@@ -107,7 +113,11 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `user_first_name`, `user_last_name`, `user_number`, `user_image`, `user_type`, `user_status`, `user_password`) VALUES
 (1, 'ali', 'ashour', '01007346184', 'admin.jpg', 'ADMIN', 'ACTIVE', '40bd001563085fc35165329ea1ff5c5ecbdbbeef'),
 (2, 'afaf', 'mohamed', '01119005218', 'teacher.jpg', 'TEACHER', 'ACTIVE', '40bd001563085fc35165329ea1ff5c5ecbdbbeef'),
-(3, 'yousif', 'ashour', '01551489667', 'student.jpg', 'STUDENT', 'ACTIVE', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
+(4, 'samah', 'ashour', '01093544836', '', 'STUDENT', 'ACTIVE', '40bd001563085fc35165329ea1ff5c5ecbdbbeef'),
+(5, 'yousif', 'ashour', '01551489667', '', 'STUDENT', 'ACTIVE', '40bd001563085fc35165329ea1ff5c5ecbdbbeef'),
+(12, 'ahmed', 'elshikh', '01234537890', 'teacher.jpg', 'TEACHER', 'ACTIVE', '40bd001563085fc35165329ea1ff5c5ecbdbbeef'),
+(13, 'nady', 'emad', '01234567872', '', 'STUDENT', 'ACTIVE', '40bd001563085fc35165329ea1ff5c5ecbdbbeef'),
+(14, 'twst', 'twstwd', '09123199801', '', 'STUDENT', 'ACTIVE', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
 
 --
 -- Indexes for dumped tables
@@ -151,7 +161,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tutorials`
@@ -163,7 +173,7 @@ ALTER TABLE `tutorials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
