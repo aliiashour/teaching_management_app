@@ -21,6 +21,7 @@
                     'user_number' => $res['user_number'],
                     'user_status' => $res['user_status'],
                     'user_course' => $res['enrollment_subject_id'],
+                    'previous_course_date' => $res['enrollment_started_at'],
                     'user_password' => $res['user_password']
                 )
             ) ; 

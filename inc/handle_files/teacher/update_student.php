@@ -39,12 +39,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     if($res){
         // here i shoud update student enrollment course
         $q = "UPDATE enrollments SET 
-            enrollment_student_id = :enrollment_student_id,
-            enrollment_subject_id = :enrollment_subject_id"; 
+            enrollment_subject_id = :enrollment_subject_id, 
+            enrollment_started_at = :enrollment_current_date
+            WHERE enrollment_student_id = :enrollment_student_id AND enrollment_started_at = :enrollment_started_at"; 
         $stmt = $db->prepare($q) ; 
         $res = $stmt->execute(array(
-            ':enrollment_student_id' => $db->lastInsertId(),
-            ':enrollment_subject_id' => $user_course
+            ':enrollment_subject_id' => $user_course,
+            ':enrollment_current_date' => date('Y-m-d', time()),
+            ':enrollment_student_id' => $user_id,
+            // how to get the previous course enrollment date for this spesific user 
+            // i have the student id and next course id !!
+            ':enrollment_started_at' => $previous_course_date
         ));
         if($res){
             $data = array('status' => 'success', 'msg'=>'student successfully edited') ; 
