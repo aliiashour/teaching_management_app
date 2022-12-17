@@ -89,7 +89,7 @@
                                     <i class="fa-solid fa-users fs-4"></i>
                                     <p class="text-capitalize text-primary">
                                         <a href="./students.php">
-                                            <span><?php echo $teacher->fetch_student_count(2)?></span>
+                                            <span><?php echo $teacher->fetch_student_count($_SESSION['user_id'])?></span>
                                             students
                                         </a>
                                     </p>

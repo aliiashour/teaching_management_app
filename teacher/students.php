@@ -188,6 +188,7 @@
                             $("#user_number").val(json['data']['user_number']); 
                             $("#user_status").val(json['data']['user_status']) ;
                             $("#user_course").val(json['data']['user_course']) ;
+                            $("#previous_course_date").val(json['data']['previous_course_date']) ;
                             $("#user_password").val('') ;
                             $("#user_modal").modal('show') ; 
                         }
@@ -230,12 +231,13 @@
             var user_password = $("#user_password").val() ; 
             var user_status = $("#user_status").val();
             var user_course = $("#user_course").val();
+            var previous_course_date = $("#previous_course_date").val();
             var url = "../inc/handle_files/teacher/" + $("#action").html() + "_student.php" ; 
             if(user_first_name != ''  && user_last_name != ''  && user_number != ''  && user_status != '' && user_course != 0){
                 $.ajax({
                     url:url,
                     method:"post",
-                    data:{user_id:user_id, user_first_name:user_first_name, user_last_name:user_last_name, user_number:user_number, user_password:user_password, user_status:user_status, user_course:user_course},
+                    data:{user_id:user_id, user_first_name:user_first_name, user_last_name:user_last_name, user_number:user_number, user_password:user_password, user_status:user_status, user_course:user_course, previous_course_date:previous_course_date},
                     success:function(data){
                         var json = JSON.parse(data) ; 
                         if(json.status == "success"){
@@ -280,6 +282,7 @@
             <div class="modal-body">
                 <form class="row g-3" method="POST">
                     <input type="hidden" id="user_id">
+                    <input type="hidden" id="previous_course_date">
                     <div id="response-form"></div>
                     <div class="col-md-6">
                         <label for="input_first_name" class="form-label">first name</label>
