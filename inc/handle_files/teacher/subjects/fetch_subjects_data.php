@@ -44,7 +44,7 @@
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $sub_arr = array() ; 
             $sub_arr[] = $counter; 
-            $sub_arr[] = $row['subject_title'] ;
+            $sub_arr[] = '<a href ="./subject.php?subject_id=' . $row['subject_id'] . '">' . $row['subject_title'] . '</a>' ;
             $sub_arr[] = $row['subject_code'] ;
             if($row['subject_status'] == 'ACTIVE'){
                 $sub_arr[] = '<span class="btn btn-sm bg-success text-light">'.ucfirst(strtolower($row['subject_status'])).'</span>' ; 

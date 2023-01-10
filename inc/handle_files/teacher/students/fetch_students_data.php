@@ -46,7 +46,7 @@
     if($stmt->rowCount()){
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $sub_arr = array() ; 
-            $sub_arr[] = $counter; 
+            $sub_arr[] = '<a href="../student/profile.php?student_id=' . $row['user_id'] . '">'.$counter.'</a>'; 
             $sub_arr[] = $row['user_first_name'] ;
             $sub_arr[] = $row['user_last_name'] ; 
             $sub_arr[] = $row['user_number'] ; 
