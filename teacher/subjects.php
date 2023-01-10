@@ -1,6 +1,6 @@
 <?php
     /////////////////////////////////////////////////////////////////////////////
-    //Subject page///////////////////////////////
+    //Subjects page///////////////////////////////
 
     $page_title = "subjects" ; 
     include_once "./init.php" ; 
@@ -80,7 +80,7 @@
                     <div class="data col-9">
                         <!-- tables data -->
                         <h1 class="text-capitalize">
-                            subject management page
+                            subjects management page
                         </h1>
                         <div class="row">
                             <div class="col-12 bg-dark text-light">just links</div>
