@@ -107,6 +107,23 @@
             return $stmt ; 
         }
         
+        // get teacher subject details
+        public function get_subject_details($subject_id, $teacher_id)
+        {
+            $q = "SELECT subject_title, subject_status, subject_code, COUNT(enrollments.enrollment_student_id) AS students_num 
+                    FROM `subjects` LEFT JOIN enrollments 
+                    ON subject_id= enrollments.enrollment_subject_id 
+                    WHERE subject_publisher = :teacher_id
+                    AND subject_id = :subject_id
+                    GROUP BY(subject_title)" ; 
+            $stmt = $this->con->prepare($q) ; 
+            $stmt->execute(array(
+                ':teacher_id' => $teacher_id,
+                ':subject_id' => $subject_id
+                )) ; 
+            return $stmt ; 
+        }
+        
         public function __destruct()
         {
             $this->con = null ;     
