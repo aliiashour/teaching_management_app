@@ -23,6 +23,7 @@
                 $res = $stmt->fetch();
                 if(sha1($_POST["user_password"])==$res['user_password']){
                     $_SESSION['user_id'] = $res['user_id'] ; 
+                    $_SESSION['user_type'] = $res['user_type'] ; 
                     if($res['user_type'] == 'STUDENT'){
                         header('location:student/') ; 
                     }elseif($res['user_type'] == 'TEACHER'){
